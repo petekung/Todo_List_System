@@ -304,14 +304,13 @@ export default function DashboardPage() {
                 onClick={() => setSelectedTodo(todo)}
               >
                 <div className="flex items-start gap-4">
-                  <Checkbox
-                    checked={todo.is_completed}
-                    onCheckedChange={(e) => {
-                      e.stopPropagation();
-                      handleToggleComplete(todo);
-                    }}
-                    className="mt-1 h-5 w-5 rounded-lg data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-blue-600 data-[state=checked]:to-cyan-500"
-                  />
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <Checkbox
+                      checked={todo.is_completed}
+                      onCheckedChange={() => handleToggleComplete(todo)}
+                      className="mt-1 h-5 w-5 rounded-lg data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-blue-600 data-[state=checked]:to-cyan-500"
+                    />
+                  </div>
                   <div className="flex-1 min-w-0">
                     <h3
                       className={`font-semibold text-lg ${
