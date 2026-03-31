@@ -62,8 +62,9 @@ export default function LoginPage() {
           <div className="flex items-center gap-2 mb-2">
             <Link href="/">
               <Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl hover:bg-blue-50">
-                <ArrowLeft className="h-4 w-4 text-gray-600" />
+                <ArrowLeft className="h-4 w-4 text-gray-600" /> 
               </Button>
+              
             </Link>
           </div>
           <CardTitle className="text-3xl font-bold gradient-text flex items-center gap-2">

@@ -21,7 +21,7 @@ export default function Home() {
             <div className="inline-flex items-center justify-center p-4 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-3xl shadow-2xl mb-6">
               <CheckSquare className="h-16 w-16 text-white" />
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold gradient-text">
+            <h1 className=" font-bold gradient-text" style={{fontSize: "4rem" }}>
               Todo List System
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
@@ -30,7 +30,7 @@ export default function Home() {
           </div>
 
           {/* Features */}
-          <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto py-8">
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto py-8">
             <div className="glass-card rounded-2xl p-6 space-y-3 hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto">
                 <Sparkles className="h-6 w-6 text-blue-600" />
@@ -51,7 +51,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="glass-card rounded-2xl p-6 space-y-3 hover:shadow-lg transition-shadow">
+            {/* <div className="glass-card rounded-2xl p-6 space-y-3 hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto">
                 <Zap className="h-6 w-6 text-purple-600" />
               </div>
@@ -59,7 +59,7 @@ export default function Home() {
               <p className="text-sm text-gray-600">
                 ประสิทธิภาพสูง โหลดเร็ว ตอบสนองทันที
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* CTA Buttons */}

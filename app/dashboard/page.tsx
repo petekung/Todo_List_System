@@ -36,6 +36,7 @@ export default function DashboardPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [todoToDelete, setTodoToDelete] = useState<string | null>(null);
+  const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
   const {
     register,
@@ -298,11 +299,17 @@ export default function DashboardPage() {
               }`}
               style={{ animationDelay: `${index * 0.05}s` }}
             >
-              <CardContent className="py-5">
+              <CardContent 
+                className="py-5 cursor-pointer hover:bg-gray-50/50 transition-colors"
+                onClick={() => setSelectedTodo(todo)}
+              >
                 <div className="flex items-start gap-4">
                   <Checkbox
                     checked={todo.is_completed}
-                    onCheckedChange={() => handleToggleComplete(todo)}
+                    onCheckedChange={(e) => {
+                      e.stopPropagation();
+                      handleToggleComplete(todo);
+                    }}
                     className="mt-1 h-5 w-5 rounded-lg data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-blue-600 data-[state=checked]:to-cyan-500"
                   />
                   <div className="flex-1 min-w-0">
@@ -327,7 +334,10 @@ export default function DashboardPage() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => setEditingTodo(todo)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setEditingTodo(todo);
+                      }}
                       className="h-10 w-10 rounded-xl hover:bg-blue-50 text-gray-600 hover:text-blue-600 transition-colors"
                     >
                       <Edit2 className="h-4 w-4" />
@@ -335,7 +345,10 @@ export default function DashboardPage() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => confirmDelete(todo.id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        confirmDelete(todo.id);
+                      }}
                       className="h-10 w-10 rounded-xl hover:bg-red-50 text-gray-600 hover:text-red-600 transition-colors"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -415,6 +428,71 @@ export default function DashboardPage() {
               ลบงาน
             </Button>
           </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Detail Dialog */}
+      <Dialog open={!!selectedTodo} onOpenChange={() => setSelectedTodo(null)}>
+        <DialogContent className="sm:max-w-lg rounded-2xl">
+          {selectedTodo && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl gradient-text flex items-center gap-2">
+                  <Check className={`h-6 w-6 ${selectedTodo.is_completed ? "text-green-600" : "text-blue-600"}`} />
+                  รายละเอียดงาน
+                </DialogTitle>
+              </DialogHeader>
+              <div className="space-y-5 py-5">
+                <div>
+                  <Label className="text-sm text-gray-500 font-medium">ชื่องาน</Label>
+                  <p className={`text-lg font-semibold mt-1 ${selectedTodo.is_completed ? "line-through text-gray-400" : "text-gray-800"}`}>
+                    {selectedTodo.title}
+                  </p>
+                </div>
+                {selectedTodo.description && (
+                  <div>
+                    <Label className="text-sm text-gray-500 font-medium">คำอธิบาย</Label>
+                    <p className="text-gray-700 mt-1 whitespace-pre-wrap">
+                      {selectedTodo.description}
+                    </p>
+                  </div>
+                )}
+                <div className="flex items-center gap-2 text-sm text-gray-500">
+                  <Sparkles className="h-4 w-4" />
+                  <span>สร้างเมื่อ {new Date(selectedTodo.created_at).toLocaleString("th-TH")}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-500">สถานะ:</span>
+                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                    selectedTodo.is_completed 
+                      ? "bg-green-100 text-green-700" 
+                      : "bg-blue-100 text-blue-700"
+                  }`}>
+                    {selectedTodo.is_completed ? "เสร็จสิ้น" : "กำลังดำเนินการ"}
+                  </span>
+                </div>
+              </div>
+              <DialogFooter className="gap-2 pt-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setSelectedTodo(null)}
+                  className="rounded-xl"
+                >
+                  ปิด
+                </Button>
+                <Button
+                  onClick={() => {
+                    setSelectedTodo(null);
+                    setEditingTodo(selectedTodo);
+                  }}
+                  className="btn-primary rounded-xl"
+                >
+                  <Edit2 className="mr-2 h-4 w-4" />
+                  แก้ไข
+                </Button>
+              </DialogFooter>
+            </>
+          )}
         </DialogContent>
       </Dialog>
     </div>
