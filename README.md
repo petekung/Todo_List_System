@@ -161,21 +161,11 @@ Todo_List_System/
 ### รัน Script สร้างข้อมูล 25 รายการ
 
 ```bash
-# วิธีที่ 1: ใช้ SQL (แนะนำ)
+# ใช้ SQL 
 # คัดลอกโค้ดจาก seed-data.sql ไปรันใน Supabase SQL Editor
-
-# วิธีที่ 2: ใช้ Node.js Script
-node auto-signup.js  # สร้าง user ใหม่ + ยืนยันอัตโนมัติ
 ```
-
-### ข้อมูล Login สำหรับทดสอบ
-
-หลังรัน `auto-signup.js` จะได้:
 ```
-Email: test177488xxxx@gmail.com
-Password: 111111
 ```
-
 ---
 
 ## 🔒 Security
